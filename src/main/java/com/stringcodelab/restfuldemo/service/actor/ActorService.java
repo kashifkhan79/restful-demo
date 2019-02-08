@@ -46,7 +46,7 @@ public class ActorService {
 
     public Actor getActorWithMostPlayedMovies() {
 
-        final Map.Entry<Actor, Long> actorWIthMostMoviesPlayed = movieRepository.getAllMovies()
+        final Map.Entry<Actor, Long> actorWithMostMoviesPlayed = movieRepository.getAllMovies()
                 .stream()
                 .flatMap(movie -> movie.getActors().stream())
                 .collect(Collectors.toMap(Function.identity(), actor -> 1L, (c1, c2) -> c1 + c2))
@@ -55,9 +55,9 @@ public class ActorService {
                 .max(Map.Entry.comparingByValue())
                 .get();
 
-        LOGGER.info(String.format("Actor %s played in total %d movies ", actorWIthMostMoviesPlayed.getKey().getFullName(), actorWIthMostMoviesPlayed.getValue() ));
+        LOGGER.info(String.format("Actor %s played in total %d movies ", actorWithMostMoviesPlayed.getKey().getFullName(), actorWithMostMoviesPlayed.getValue() ));
 
-        return actorWIthMostMoviesPlayed.getKey();
+        return actorWithMostMoviesPlayed.getKey();
 
     }
 }
